@@ -5,33 +5,42 @@
       <v-col cols="12">
         <v-form ref="form" lazy-validation class="text-center">
           <v-text-field
+            v-model="newTask.title"
+            :counter="128"
+            :rules="newTask.titleRules"
             label="Title"
             required
           ></v-text-field>
 
           <v-textarea
+            v-model="newTask.description"
             autocomplete="Description"
             label="Description"
           ></v-textarea>
 
            <v-text-field
-            v-model="email"
-            :rules="emailRules"
+            v-model="newTask.email"
+            :rules="newTask.emailRules"
             label="E-mail"
           ></v-text-field>
 
+        <!--   <v-date-picker v-model="newTask.deadline"></v-date-picker>     -->
+
           <v-text-field
+            v-model="newTask.deadline"
             label="Deadline date"
             required
           ></v-text-field>
-          
+           
           <v-checkbox
+            v-model="newTask.is_complete"
             label="Is task completed?"
           ></v-checkbox>
 
           <v-btn 
           color="error" 
           class="mr-4"
+          @click="reset"
            >
            Clear
            </v-btn>
@@ -39,7 +48,8 @@
           <v-btn
             color="success"
             class="mr-4"
-            
+            :disabled="!newTask.title"
+            @click="add"
           >
             Add
           </v-btn>
@@ -50,7 +60,7 @@
 
 
     <v-row>
-      <v-col cols = "12">
+      <v-col cols = "12" v-if="taskList.length">
         <h3>List:</h3>
 
         <v-list>
@@ -101,17 +111,62 @@ export default {
 
   data: () => ({
     selected: [],
+     newTask: {
+      title: "",
+      description: "",
+      titleRules: [
+        (v) => !!v || "Title is required",
+        (v) => (v && v.length <= 128) || "Title must be less than 128 characters",
+      ],
+      is_complete: false,
+      email: "",
+      emailRules: [ 
+        (v) => /.+@.+/.test(v) || 'E-mail must be valid' 
+      ],
+      deadline: "",
+      user: 1,
+    },
     taskList: [],
+    url: "http://localhost:8000/api/task/",
   }),
    mounted() {
-    this.getTodos();
+    this.getTasks();
   },
   methods: {
-   getTodos() {
-       axios.get("http://127.0.0.1:8000/api/task/").then((response) => {
+   getTasks() {
+       axios.get(`${this.url}?ordering=is_complete`).then((response) => {
         this.taskList = response.data;
+        response.data.forEach((element, index) => {
+          if (!element.is_complete) this.selected.push(index);
+          this.$forceUpdate();
+        });
     })
    },
+
+    reset() {
+      this.$refs.form.reset();
+    },
+
+    add() {
+      var data = this.newTask;
+      axios.post("http://localhost:8080/api/task", data).then((response) => {
+        console.log(response);
+        this.getTasks();
+      });
+    },
+    
+    updateStatus(item) {
+      item.is_complete = !item.is_complete;
+      const url = `${this.url}${item.id}/`;
+      var data = {
+        is_complete: item.is_complete,
+      };
+      axios.patch(url, data).then((response) => {
+        console.log(response);
+        this.getTasks();
+      });
+    },
+
   },
   
 };

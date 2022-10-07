@@ -19,7 +19,7 @@ class Task(models.Model):
   email = models.EmailField(null=True)
   created_at = models.DateTimeField(auto_now_add=True)
   updated_at = models.DateTimeField(auto_now=True)
-  deadline = models.DateTimeField()
+  deadline = models.DateField()
 
   def __str__(self):
     return f"{self.user.first_name} - {self.title}"
