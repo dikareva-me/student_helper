@@ -16,6 +16,7 @@ class Task(models.Model):
     null=True,
     blank=True
   )
+  email = models.EmailField(null=True)
   created_at = models.DateTimeField(auto_now_add=True)
   updated_at = models.DateTimeField(auto_now=True)
   deadline = models.DateTimeField()
