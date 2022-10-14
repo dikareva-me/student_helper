@@ -14,6 +14,7 @@ Task model has following fields:
 7. When it was created
 8. When it was updated
 9. Deadline date
+
 Tasks can be searched by title and subject and be ordered by completness, date of creation/updating/deadline. When posting a new task, a title and a deadline must be present. Other fields are optional, but if the email is present it must be valid.
 
 ### Frontend
