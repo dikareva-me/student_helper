@@ -3,7 +3,7 @@ A repository for a web-app "Student helper" for Java course and API course.
 
 ## How this app works.
 
-###Backend
+### Backend
 Task model has following fields:
 1. Title
 2. Description
@@ -16,11 +16,11 @@ Task model has following fields:
 9. Deadline date
 Tasks can be searched by title and subject and be ordered by completness, date of creation/updating/deadline. When posting a new task, a title and a deadline must be present. Other fields are optional, but if the email is present it must be valid.
 
-###Frontend
+### Frontend
 On the frontend the list of tasks and a form for posting new task are shown. The rules of a new task are the same as those in the backend. Posting new task from frontend does not work yet though. The details of tasks are not present on the frontend yet. From the frontend you can change the status of a task and it will change in the database. 
 
 
-##HTTPS requests made through Postman are listed below:
+## HTTPS requests made through Postman are listed below:
 1. Posting a task. It must have a title and a deadline, other fields are optional. If an email is present it must be valid.
 2. Getting all tasks present.
 3. Getting task by name. Returns a task with required title from user.
@@ -28,7 +28,7 @@ On the frontend the list of tasks and a form for posting new task are shown. The
 
 https://www.getpostman.com/collections/487b8b1afb7de9d16a4d
 
-##How to install project
+## How to install project
 1. Create a virtual environment by typing 
 python -m venv .venv
 in the terminal in project's folder.
