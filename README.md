@@ -30,38 +30,38 @@ On the frontend the list of tasks and a form for posting new task are shown. The
 https://www.getpostman.com/collections/487b8b1afb7de9d16a4d
 
 ## How to install project
-1. Create a virtual environment by typing 
-python -m venv .venv
-in the terminal in project's folder.
-2. Activate virtual env by typing 
-.\.venv\scripts\Activate.ps1
-3. Install django and django REST
-pip install django
-pip install djangorestframework
-pip install django-filter 
-pip install django-cors-headers
-4. Run the server:
-cd helper
-python manage.py runserver
-5. Install nodejs if it's not present.
-6. Install vue cli
-npm install -g @vue/cli
-7. Create a vue project
-cd frontend
-vue create .
-Select Manually selected features and besides selected two select Router.
-Select 2.x version
-Yes
-ESLint + Prettier
-Lint on save
-In package.json
-8. Install additional packages
-npm i axios
-vue add vuetify
+1. Create a virtual environment by typing  
+python -m venv .venv  
+in the terminal in project's folder.  
+2. Activate virtual env by typing   
+.\.venv\scripts\Activate.ps1  
+3. Install django and django REST  
+pip install django  
+pip install djangorestframework  
+pip install django-filter   
+pip install django-cors-headers  
+4. Run the server:  
+cd helper  
+python manage.py runserver  
+5. Install nodejs if it's not present.  
+6. Install vue cli  
+npm install -g @vue/cli  
+7. Create a vue project  
+cd frontend  
+vue create .  
+Select Manually selected features and besides selected two select Router.  
+Select 2.x version  
+Yes   
+ESLint + Prettier  
+Lint on save  
+In package.json  
+8. Install additional packages  
+npm i axios  
+vue add vuetify  
 9. Copy all code from https://github.com/dikareva-me/student_helper/blob/main/frontend/src/components/HelloWorld.vue and https://github.com/dikareva-me/student_helper/blob/main/frontend/src/App.vue and paste into your created HelloWorld.vue and App.vue respectfully (I don't know how else to create a vue project for an already existing vue app and couldnt find another solution) (You can also try to copy with replacing but I'm not sure how well it will work)
-10. Run server (while running django server)
-npm run serve
-11.* If you have an error: 
-9:13 error Component name “home“ should always be multi-word vue/multi-word-component-names
+10. Run server (while running django server)  
+npm run serve  
+11.* If you have an error:   
+9:13 error Component name “home“ should always be multi-word vue/multi-word-component-names  
 The solution is here: https://programmerah.com/913-error-component-name-home-should-always-be-multi-word-vue-multi-word-component-names-49448/
 
