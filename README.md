@@ -22,7 +22,7 @@ On the frontend the list of tasks and a form for posting new task are shown. The
 
 
 ## HTTPS requests made through Postman are listed below:
-1. Posting a task. It must have a title and a deadline, other fields are optional. If an email is present it must be valid.
+1. Posting a task. It must have a title and a valid (date type) deadline, other fields are optional. If an email is present it must be valid.
 2. Getting all tasks present.
 3. Getting task by name. Returns a task with required title from user.
 4. Getting all uncomplete tasks and ordering it by ascending date of deadline.
