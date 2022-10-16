@@ -18,7 +18,7 @@ Task model has following fields:
 Tasks can be searched by title and subject and be ordered by completness, date of creation/updating/deadline. When posting a new task, a title and a deadline must be present. Other fields are optional, but if the email is present it must be valid.
 
 ### Frontend
-On the frontend the list of tasks and a form for posting new task are shown. The rules of a new task are the same as those in the backend. Posting new task from frontend does not work yet though. The details of tasks are not present on the frontend yet. From the frontend you can change the status of a task and it will change in the database. 
+On the frontend the list of tasks and a form for posting new task are shown. The rules of a new task are the same as those in the backend. Posting new task from frontend works now. The details of tasks are not present on the frontend yet. From the frontend you can change the status of a task and it will change in the database. 
 
 
 ## HTTPS requests made through Postman are listed below:
