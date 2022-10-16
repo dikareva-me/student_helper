@@ -24,14 +24,13 @@
             label="E-mail"
           ></v-text-field>
 
-        <!--   <v-date-picker v-model="newTask.deadline"></v-date-picker>     -->
-
+      <!--    <v-date-picker v-model="newTask.deadline"></v-date-picker>    -->
+ 
           <v-text-field
             v-model="newTask.deadline"
             label="Deadline date"
-            required
           ></v-text-field>
-           
+            
           <v-checkbox
             v-model="newTask.is_complete"
             label="Is task completed?"
@@ -65,8 +64,6 @@
 
         <v-list>
           <v-list-item-group 
-            v-model="selected" 
-            color="deep-purple" 
             multiple
           >
             <v-list-item
@@ -112,14 +109,14 @@ export default {
   data: () => ({
     selected: [],
      newTask: {
-      title: "",
-      description: "",
+      title:null,
+      description:null,
       titleRules: [
         (v) => !!v || "Title is required",
         (v) => (v && v.length <= 128) || "Title must be less than 128 characters",
       ],
       is_complete: false,
-      email: "",
+      email:null,
       emailRules: [ 
         (v) => /.+@.+/.test(v) || 'E-mail must be valid' 
       ],
@@ -148,10 +145,15 @@ export default {
     },
 
     add() {
+      console.log(this.newTask);
       var data = this.newTask;
-      axios.post("http://localhost:8080/api/task", data).then((response) => {
+      axios.post("http://localhost:8000/api/task/", data)
+      .then((response) => {
         console.log(response);
         this.getTasks();
+      })
+      .catch((error) => {
+        console.log(error);
       });
     },
     
@@ -161,9 +163,13 @@ export default {
       var data = {
         is_complete: item.is_complete,
       };
-      axios.patch(url, data).then((response) => {
+      axios.patch(url, data)
+      .then((response) => {
         console.log(response);
         this.getTasks();
+      })
+      .catch((error) => {
+        console.log(error);
       });
     },
 

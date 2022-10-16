@@ -9,7 +9,7 @@ class Task(models.Model):
   description = models.TextField(null=True)
   subject = models.TextField(null=True)
   is_complete = models.BooleanField(default=False)
-  user = models.ForeignKey(                           #used to define one-to-many relashionships
+  user = models.ForeignKey(                          
     settings.AUTH_USER_MODEL,
     on_delete=models.CASCADE,
     related_name="task",
