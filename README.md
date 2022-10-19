@@ -27,7 +27,7 @@ On the frontend the list of tasks and a form for posting new task are shown. The
 3. Getting task by name. Returns a task with required title from user.
 4. Getting all uncomplete tasks and ordering it by ascending date of deadline.
 
-https://www.getpostman.com/collections/487b8b1afb7de9d16a4d JSON link
+https://www.getpostman.com/collections/487b8b1afb7de9d16a4d JSON link  
 https://www.postman.com/payload-pilot-68641284/workspace/my-workspace/collection/23839017-0a119f7c-1726-49b0-b3fc-f3661e1e0b01?ctx=documentation
 link to a workspace
 
