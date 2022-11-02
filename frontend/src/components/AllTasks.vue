@@ -56,43 +56,6 @@
             </v-layout>
           </template>
 
-<!--
-
-        <v-list>
-          <v-list-item-group 
-            multiple
-          >
-            <v-list-item
-              v-for="item in taskList"
-              :key="item.id"
-              @click="updateStatus(item);"
-            >
-              <v-list-item-icon>
-                {{ item.id }}
-              </v-list-item-icon>
-
-              <v-list-item-content>
-                <v-list-item-title>
-                  <strong>{{ item.title }}</strong>
-                </v-list-item-title>
-
-                <v-list-item-subtitle>
-                  {{ item.description }}
-                </v-list-item-subtitle>
-              </v-list-item-content>
-
-              <v-list-item-action>
-                <v-checkbox
-                  :input-value="item.is_complete"
-                  color="deep-purple "
-                ></v-checkbox>
-              </v-list-item-action>
-
-            </v-list-item>
-          </v-list-item-group>
-        </v-list>
--->
-
       </v-col>
     </v-row>
   </v-container>

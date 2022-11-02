@@ -164,9 +164,9 @@ export default {
     onSubmit() {
         const newTask = {
             title: this.title,
-            description:null,
-            is_complete:false,
-            email:null,
+            description:this.description,
+            is_complete:this.is_complete,
+            email:this.email,
             deadline:this.deadline,
             user:1
         }
