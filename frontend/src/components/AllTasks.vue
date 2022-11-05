@@ -7,18 +7,49 @@
     <v-row>
       <v-col cols = "12" v-if="taskList.length">
         <h3>List:</h3>
-        
+       <!-- <v-flex --xs12 sm6 md11-->
           <template>
             <v-layout>
-              <v-flex xs12 sm6 md11>
+              <v-flex >
                 <v-card
                 v-bind:class="{done: task.is_complete}" 
+                class="mb-3"
                 v-for="task in taskList"
                 :key="task.id"
                 >
+                  <!--  
+                    ANOTHER VERSION OF A CARD: маленький серый текст в описании и дедлайне. 
+                    Эту версию лучше использоват, т.к. разделены v-card-title и v-card-text (в прошлой все в тайтле),
+                    но надо отредактировать стиль.
+                 <v-card-title
+                  primary-title
+                  style="text-align:center">
+
+                    <div>
+                      <div
+                      v-if="task.is_complete">
+                      <span class="red--text">Task is complete</span>
+
+                      </div>
+                      <div>
+                      <h3 class="headline mb-2"
+                      > {{ task.title }}</h3>
+                      </div>
+                    </div>
+  
+                  </v-card-title>
+                  <v-card-text>
+                      <div>{{ task.description }} </div>
+                      <div>Deadline date: {{ task.deadline }}</div>
+              
+                  </v-card-text>
+
+    -->
+                 
+                 
+                 <!-- ЧТО ИСПРАВИТЬ: сделать по центру тайтл и мб другие элементы карточки -->
                   <v-card-title
-                  
-                   primary-title>
+                   primary-title style="text-align:center">
                     <div>
                       <div
                       v-if="task.is_complete">
@@ -26,27 +57,28 @@
 
                       </div>
 
-                      <h3 class="headline mb-0">{{ task.title }}</h3>
-                      <div> {{ task.description }} </div>
-                      <div>{{ task.deadline }}</div>
+                      <h3 class="headline mb-2"
+                      > {{ task.title }}</h3>
+                      <div>{{ task.description }} </div>
+                      <div>Deadline date: {{ task.deadline }}</div>
                     </div>
                   </v-card-title>
 
                   <v-card-actions>
                     <v-btn 
-                    flat color="orange"
-                 
+                    color="orange"
+                    @click="taskPage(task)"
                     >Go to task page
                     </v-btn>
 
                     <v-btn 
-                    flat color="orange"
+                    color="orange"
                     @click="updateStatus(task);"
                     v-if="!task.is_complete"
                     >Complete task
                     </v-btn>
                     <v-btn 
-                    flat color="orange"
+                    color="orange"
                     @click="updateStatus(task);"
                     v-else>Uncomplete task</v-btn>
 
@@ -86,23 +118,11 @@ export default {
         });
     })
    },
-    onNewTaskCreated(event) {
-      console.log(event);
-      const newTask={
-        title:event.title,
-        description:event.description,
-        is_complete:event.is_complete,
-        email:event.email,
-        deadline:event.deadline,
-        user:event.user
-      }
-      this.taskList.push(newTask)
-    },
     reset() {
       this.$refs.form.reset();
     },
-    
     updateStatus(item) {
+      console.log(item);
       item.is_complete = !item.is_complete;
       const url = `${this.url}${item.id}/`;
       var data = {
@@ -117,6 +137,10 @@ export default {
         console.log(error);
       });
     },
+    taskPage(task){
+      console.log(task);
+      this.$emit("task-page", task);
+    }
    
 
   },
