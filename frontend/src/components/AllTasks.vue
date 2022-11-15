@@ -6,7 +6,7 @@
 
     <v-row>
       <v-col cols = "12" v-if="taskList.length">
-        <h3>List:</h3>
+        <h3>Список заданий:</h3>
        <!-- <v-flex --xs12 sm6 md11-->
           <template>
             <v-layout>
@@ -53,14 +53,14 @@
                     <div>
                       <div
                       v-if="task.is_complete">
-                      <span class="red--text">Task is complete</span>
+                      <span class="red--text">Задание выполнено</span>
 
                       </div>
 
                       <h3 class="headline mb-2"
                       > {{ task.title }}</h3>
                       <div>{{ task.description }} </div>
-                      <div>Deadline date: {{ task.deadline }}</div>
+                      <div>Дедлайн: {{ task.deadline }}</div>
                     </div>
                   </v-card-title>
 
@@ -68,19 +68,19 @@
                     <v-btn 
                     color="orange"
                     @click="taskPage(task)"
-                    >Go to task page
+                    >Перейти на страницу задания
                     </v-btn>
 
                     <v-btn 
                     color="orange"
                     @click="updateStatus(task);"
                     v-if="!task.is_complete"
-                    >Complete task
+                    >Задание выполнено
                     </v-btn>
                     <v-btn 
                     color="orange"
                     @click="updateStatus(task);"
-                    v-else>Uncomplete task</v-btn>
+                    v-else>Вернуть в невыполненные</v-btn>
 
                   </v-card-actions>
                 </v-card>

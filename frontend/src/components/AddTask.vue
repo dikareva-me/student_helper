@@ -5,10 +5,10 @@
     elevation="6"
     @click="backToTasks"
     >
-    ← Back to tasks
+    ← Вернуться к заданиям
     </v-btn>
     
-    <h3>New task:</h3>
+    <h3>Создать новое задание:</h3>
 
      <v-row class="mb-3">
       <v-col cols="12">
@@ -97,7 +97,7 @@
           class="mr-4"
           @click="reset"
            >
-           Clear
+           Очистить
            </v-btn>
  
           <v-btn 
@@ -107,7 +107,7 @@
             :disabled="!this.title"
             @click.prevent="onSubmit"
           >
-            Add
+            Создать
           </v-btn> 
           </div>
             
@@ -116,14 +116,14 @@
             type="success"
             v-if="taskAdded"
             >
-            Task succesfully created.
+            Задание успешно создано.
         </v-alert>
             <v-alert
             color="red"
             type="error"
             v-if="taskError"
             >
-            Error: Failed to create a task. Please, try again.
+            Ошибка: невозможно создать такое задание. Пожалуйста, попробуйте снова.
         </v-alert>
 
 
