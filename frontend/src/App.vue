@@ -28,17 +28,17 @@
         >
         Задание удалено.
         </v-alert>
-
-
+              
+      <template v-if="taskPageMode">
+        <Task @hide-task="hideTask" :task="task" />
+      </template>
 
 
       <template v-if="allTasksMode">
         <AllTasks @task-page="taskPage" />
       </template>
 
-      <template v-if="taskPageMode">
-        <Task @task-deleted="taskDeleted" :task="task" />
-      </template>
+
     </v-main>
   </v-app>
 </template>
@@ -90,11 +90,11 @@ export default {
       this.taskPageMode = true;
     },
 
-    taskDeleted(){
+    hideTask(e){
       this.setFlagsFalse();
-      this.taskDel = true;
+      console.log(e);
+      this.taskDel = e;
       this.allTasksMode = true;
-
     }
 
 

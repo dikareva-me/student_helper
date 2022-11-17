@@ -74,6 +74,7 @@ export default {
   },
   data() {
     return {
+      taskDeleted: false,
       dialog: false,
       editTaskMode: false,
       taskPageMode: true,
@@ -92,17 +93,21 @@ export default {
       this.taskPageMode = true;
     },
 
-    deleteTask() {
+    async deleteTask() {
       this.dialog = false;
       const url = `${this.url}${this.task.id}/`;
-      axios.delete(url, this.task)
+      await axios.delete(url, this.task)
         .then((response) => {
           console.log(response);
+          console.log("no err");
         })
         .catch((error) => {
           console.log(error);
+          console.log("err");
         });
-      this.$emit("task-deleted");
+      this.taskDeleted = true;
+      console.log(this.taskDeleted);
+      this.$emit("hide-task", this.taskDeleted);
     },
   },
 };
