@@ -9,7 +9,7 @@
     <v-main>
       <v-container>
         <v-btn
-          v-if="!newTaskMode"
+          v-if="allTasksMode"
           color="primary"
           elevation="6"
           @click="createTask"

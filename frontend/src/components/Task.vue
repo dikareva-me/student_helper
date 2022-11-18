@@ -1,12 +1,65 @@
 <template>
   <v-container>
+
     <template v-if="taskPageMode">
-      <div>{{ this.task }}</div>
-      <h3 lazy-validation class="text-center">Задание</h3>
+      <v-btn
+      color="primary"
+      elevation="6"
+      @click="backToTasks"
+      >
+      ← Вернуться к заданиям
+      </v-btn>
+
+
+
 
       <v-row class="mb-3">
         <v-col cols="12">
           <v-form ref="form" lazy-validation class="text-center">
+
+              <h2 lazy-validation class="text-center">Задание</h2>
+              <br>
+              <br>
+
+              <div>
+              <strong>Название:</strong>
+              {{task.title}}
+              <br>
+              <br>
+              <template v-if="task.description != null">
+              <strong>Описание:</strong>
+              {{task.description}}
+              <br>
+              <br>
+              </template>
+
+              <template v-if="task.subject != null">
+              <strong>Предмет:</strong>
+              <br>
+              <br>
+              </template>
+
+              <template v-if="task.email != null">
+              <strong>Email:</strong>
+              {{task.email}}
+              <br>
+              <br>
+              </template>
+
+              <strong>Дедлайн:</strong>
+              {{task.deadline}}
+              <br>
+              <br>
+
+              <template v-if="task.is_complete != true">
+              <strong>Задание не выполнено</strong>
+              </template>
+              <template v-else>
+              <strong>Задание выполнено</strong>
+              </template>
+
+              </div>
+              <br>
 
             <v-btn color="blue" 
             class="mr-4" 
@@ -109,6 +162,9 @@ export default {
       console.log(this.taskDeleted);
       this.$emit("hide-task", this.taskDeleted);
     },
+    backToTasks(){
+      this.$emit("hide-task", this.taskDeleted);
+    }
   },
 };
 </script>

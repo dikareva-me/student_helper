@@ -17,14 +17,14 @@
             v-model="title"
             :counter="128"
             :rules="titleRules"
-            label="Title"
+            label="Название"
             required
           ></v-text-field>
         
         <v-textarea
             v-model="description"
-            autocomplete="Description"
-            label="Description"
+            autocomplete="Описание"
+            label="Описание"
           ></v-textarea>
 
           <v-text-field
@@ -33,14 +33,10 @@
             label="E-mail"
           ></v-text-field>
 
-         <v-combobox
+         <v-text-field
           v-model="subject"
-          :items="items"
-          label="Subject"
-          multiple
-          outlined
-          dense
-        ></v-combobox>
+          label="Предмет"
+        ></v-text-field>
 
            <v-menu
         ref="menu"
@@ -55,7 +51,7 @@
         <template v-slot:activator="{ on, attrs }">
           <v-text-field
             v-model="deadline"
-            label="Deadline date"
+            label="Дата дедлайна"
             prepend-icon="mdi-calendar"
             readonly
             v-bind="attrs"
@@ -88,7 +84,7 @@
 
         <v-checkbox
             v-model="is_complete"
-            label="Is task completed?"
+            label="Задание выполнено?"
           ></v-checkbox>
 
 <div class="mb-3">
@@ -153,7 +149,7 @@ export default {
         subject:null,
         email:null,
         emailRules: [ 
-            (v) => /.+@.+/.test(v) || 'E-mail must be valid' 
+            (v) => !v || /.+@.+/.test(v) || 'E-mail must be valid' 
           ],
         deadline:null,
         taskAdded:false,

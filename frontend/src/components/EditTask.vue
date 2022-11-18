@@ -31,14 +31,10 @@
             label="E-mail"
           ></v-text-field>
 
-          <v-combobox
-            v-model="task.subject"
-            :items="items"
-            label="Subject"
-            multiple
-            outlined
-            dense
-          ></v-combobox>
+         <v-text-field
+          v-model="subject"
+          label="Предмет"
+        ></v-text-field>
 
           <v-menu
             ref="menu"

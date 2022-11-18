@@ -4,8 +4,7 @@
     <v-divider></v-divider>
 
 
-    <v-row>
-      <v-col cols = "12" v-if="taskList.length">
+      <v-col v-if="taskList.length">
         <h3>Список заданий:</h3>
        <!-- <v-flex --xs12 sm6 md11-->
           <template>
@@ -13,7 +12,7 @@
               <v-flex >
                 <v-card
                 v-bind:class="{done: task.is_complete}" 
-                class="mb-3"
+                class="mb-3 "
                 v-for="task in taskList"
                 :key="task.id"
                 >
@@ -47,9 +46,10 @@
     -->
                  
                  
-                 <!-- ЧТО ИСПРАВИТЬ: сделать по центру тайтл и мб другие элементы карточки -->
+                 <!-- ЧТО ИСПРАВИТЬ: сделать по центру тайтл и мб другие элементы карточки
+                  primary-title style="text-align:center" -->
                   <v-card-title
-                   primary-title style="text-align:center">
+                  >
                     <div>
                       <div
                       v-if="task.is_complete">
@@ -89,7 +89,6 @@
           </template>
 
       </v-col>
-    </v-row>
   </v-container>
 </template>
 
