@@ -91,7 +91,7 @@
             label="Is task completed?"
           ></v-checkbox>
 
-
+<div class="mb-3">
     <v-btn 
           color="error" 
           class="mr-4"
@@ -109,6 +109,7 @@
           >
             Add
           </v-btn> 
+          </div>
             
             <v-alert
             color="green"
@@ -124,7 +125,6 @@
             >
             Error: Failed to create a task. Please, try again.
         </v-alert>
-
 
 
 

@@ -26,12 +26,20 @@
       <AddTask  
         @hide-new-task="hideNewTask" />
     </template>
+
      <template v-if="allTasksMode">
-    <AllTasks />   
+    <AllTasks 
+      @task-page="taskPage"
+    />   
       </template>
-  <!--     <NewTask />
-     
-     <router-view /> -->
+      
+     <template v-if="taskPageMode">
+    <Task 
+      @task-page="taskPage"
+      :task="task"
+    />   
+      </template>
+
     </v-main>
   </v-app>
 </template>
@@ -40,31 +48,41 @@
 
 import AddTask from '@/components/AddTask';
 //import Test from '@/components/Test';
+import Task from '@/components/Task';
 import AllTasks from '@/components/AllTasks';
 export default {
   name: "App",
   components: {
     AllTasks,
+    Task,
     AddTask
   },
   data() {
     return {
       taskList:[],
-      flag:"",
-      tag : null,
-      date : null,
       newTaskMode:false,
       allTasksMode:true,
+      taskPageMode:false,
+      task:null,
     }
   },
   methods:{
     hideNewTask(){
       this.newTaskMode = false;
       this.allTasksMode = true;
+      this.taskPageMode = false;
     },
     createTask(){
       this.newTaskMode = true;
       this.allTasksMode = false;
+      this.taskPageMode = false;
+    },
+    taskPage(event){
+      this.task = event;
+      console.log(this.task);
+      this.newTaskMode = false;
+      this.allTasksMode = false;
+      this.taskPageMode = true;
     }
   }
 };
