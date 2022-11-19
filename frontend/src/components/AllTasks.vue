@@ -4,51 +4,83 @@
     <v-divider></v-divider>
 
 
-    <v-row>
-      <v-col cols = "12" v-if="taskList.length">
-        <h3>List:</h3>
-        
+      <v-col v-if="taskList.length">
+        <h3>Список заданий:</h3>
+       <!-- <v-flex --xs12 sm6 md11-->
           <template>
             <v-layout>
-              <v-flex xs12 sm6 md11>
+              <v-flex >
                 <v-card
                 v-bind:class="{done: task.is_complete}" 
+                class="mb-3 "
                 v-for="task in taskList"
                 :key="task.id"
                 >
-                  <v-card-title
-                  
-                   primary-title>
+                  <!--  
+                    ANOTHER VERSION OF A CARD: маленький серый текст в описании и дедлайне. 
+                    Эту версию лучше использоват, т.к. разделены v-card-title и v-card-text (в прошлой все в тайтле),
+                    но надо отредактировать стиль.
+                 <v-card-title
+                  primary-title
+                  style="text-align:center">
+
                     <div>
                       <div
                       v-if="task.is_complete">
                       <span class="red--text">Task is complete</span>
 
                       </div>
+                      <div>
+                      <h3 class="headline mb-2"
+                      > {{ task.title }}</h3>
+                      </div>
+                    </div>
+  
+                  </v-card-title>
+                  <v-card-text>
+                      <div>{{ task.description }} </div>
+                      <div>Deadline date: {{ task.deadline }}</div>
+              
+                  </v-card-text>
 
-                      <h3 class="headline mb-0">{{ task.title }}</h3>
-                      <div> {{ task.description }} </div>
-                      <div>{{ task.deadline }}</div>
+    -->
+                 
+                 
+                 <!-- ЧТО ИСПРАВИТЬ: сделать по центру тайтл и мб другие элементы карточки
+                  primary-title style="text-align:center" -->
+                  <v-card-title
+                  >
+                    <div>
+                      <div
+                      v-if="task.is_complete">
+                      <span class="red--text">Задание выполнено</span>
+
+                      </div>
+
+                      <h3 class="headline mb-2"
+                      > {{ task.title }}</h3>
+                      <div>{{ task.description }} </div>
+                      <div>Дедлайн: {{ task.deadline }}</div>
                     </div>
                   </v-card-title>
 
                   <v-card-actions>
                     <v-btn 
-                    flat color="orange"
-                 
-                    >Go to task page
+                    color="orange"
+                    @click="taskPage(task)"
+                    >Перейти на страницу задания
                     </v-btn>
 
                     <v-btn 
-                    flat color="orange"
+                    color="orange"
                     @click="updateStatus(task);"
                     v-if="!task.is_complete"
-                    >Complete task
+                    >Задание выполнено
                     </v-btn>
                     <v-btn 
-                    flat color="orange"
+                    color="orange"
                     @click="updateStatus(task);"
-                    v-else>Uncomplete task</v-btn>
+                    v-else>Вернуть в невыполненные</v-btn>
 
                   </v-card-actions>
                 </v-card>
@@ -57,7 +89,6 @@
           </template>
 
       </v-col>
-    </v-row>
   </v-container>
 </template>
 
@@ -86,23 +117,11 @@ export default {
         });
     })
    },
-    onNewTaskCreated(event) {
-      console.log(event);
-      const newTask={
-        title:event.title,
-        description:event.description,
-        is_complete:event.is_complete,
-        email:event.email,
-        deadline:event.deadline,
-        user:event.user
-      }
-      this.taskList.push(newTask)
-    },
     reset() {
       this.$refs.form.reset();
     },
-    
     updateStatus(item) {
+      console.log(item);
       item.is_complete = !item.is_complete;
       const url = `${this.url}${item.id}/`;
       var data = {
@@ -117,6 +136,10 @@ export default {
         console.log(error);
       });
     },
+    taskPage(task){
+      console.log(task);
+      this.$emit("task-page", task);
+    }
    
 
   },

@@ -6,66 +6,98 @@
       </div>
     </v-app-bar>
 
-
-
     <v-main>
       <v-container>
-   <v-btn
-    v-if="!newTaskMode"
-    color="primary"
-    elevation="6"
-    @click="createTask"
-    >
-    Create new task
-    </v-btn>
-</v-container>
+        <v-btn
+          v-if="allTasksMode"
+          color="primary"
+          elevation="6"
+          @click="createTask"
+        >
+          Создать новое задание
+        </v-btn>
+      </v-container>
 
-
-
-    <template v-if="newTaskMode">
-      <AddTask  
-        @hide-new-task="hideNewTask" />
-    </template>
-     <template v-if="allTasksMode">
-    <AllTasks />   
+      <template v-if="newTaskMode">
+        <AddTask @hide-new-task="hideNewTask" />
       </template>
-  <!--     <NewTask />
-     
-     <router-view /> -->
+
+        <v-alert
+        color="red"
+        v-if="taskDel"
+        >
+        Задание удалено.
+        </v-alert>
+              
+      <template v-if="taskPageMode">
+        <Task @hide-task="hideTask" :task="task" />
+      </template>
+
+
+      <template v-if="allTasksMode">
+        <AllTasks @task-page="taskPage" />
+      </template>
+
+
     </v-main>
   </v-app>
 </template>
 
 <script>
-
-import AddTask from '@/components/AddTask';
+import AddTask from "@/components/AddTask";
 //import Test from '@/components/Test';
-import AllTasks from '@/components/AllTasks';
+import Task from "@/components/Task";
+import AllTasks from "@/components/AllTasks";
 export default {
   name: "App",
   components: {
     AllTasks,
-    AddTask
+    Task,
+    AddTask,
   },
   data() {
     return {
-      taskList:[],
-      flag:"",
-      tag : null,
-      date : null,
-      newTaskMode:false,
-      allTasksMode:true,
-    }
+      taskList: [],
+      taskDel:false,
+      newTaskMode: false,
+      allTasksMode: true,
+      taskPageMode: false,
+      task: null,
+    };
   },
-  methods:{
-    hideNewTask(){
+  methods: {
+    setFlagsFalse(){
       this.newTaskMode = false;
+      this.allTasksMode = false;
+      this.taskPageMode = false;
+      this.taskDel = false;
+
+    },
+
+    hideNewTask() {
+      this.setFlagsFalse();
       this.allTasksMode = true;
     },
-    createTask(){
+
+    createTask() {
+      this.setFlagsFalse();
       this.newTaskMode = true;
-      this.allTasksMode = false;
+    },
+
+    taskPage(event) {
+      this.setFlagsFalse();
+      this.task = event;
+      this.taskPageMode = true;
+    },
+
+    hideTask(e){
+      this.setFlagsFalse();
+      console.log(e);
+      this.taskDel = e;
+      this.allTasksMode = true;
     }
-  }
+
+
+  },
 };
 </script>
