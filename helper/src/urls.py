@@ -28,8 +28,8 @@ urlpatterns = [
     path('auth/', include('auth.urls')),
     path('admin/', admin.site.urls),
   #  path('api-auth/', include('rest_framework.urls')),
-#    path('token/', TokenObtainPairView.as_view(), name='token_obtain_pair'),
- #   path('token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
+    path('token/', TokenObtainPairView.as_view(), name='token_obtain_pair'),
+    path('token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
 ]
 
 if settings.DEBUG:
