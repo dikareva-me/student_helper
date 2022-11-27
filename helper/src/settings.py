@@ -39,7 +39,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'rest_framework',
-    'rest_framework_simplejwt.token_blacklist',
+    'knox',
+  #  'rest_framework_simplejwt.token_blacklist',
     'django_filters',
     'corsheaders',
     'student_helper',
@@ -51,16 +52,16 @@ REST_FRAMEWORK = {
         'django_filters.rest_framework.DjangoFilterBackend'
     ],
     'DEFAULT_AUTHENTICATION_CLASSES': [
-        'rest_framework_simplejwt.authentication.JWTAuthentication',
+        'knox.auth.TokenAuthentication',
     ],
 }
-
+'''
 SIMPLE_JWT = {
     
     'ACCESS_TOKEN_LIFETIME': timedelta(minutes=30),
     'REFRESH_TOKEN_LIFETIME': timedelta(days=30),
     'ROTATE_REFRESH_TOKENS': True,
-}
+}'''
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',

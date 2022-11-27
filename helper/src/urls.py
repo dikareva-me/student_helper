@@ -15,10 +15,6 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
-from rest_framework_simplejwt.views import (
-    TokenObtainPairView,
-    TokenRefreshView,
-)
 from django.conf import settings
 from django.conf.urls.static import static
 
@@ -27,9 +23,7 @@ urlpatterns = [
     path('', include('student_helper.urls')),
     path('auth/', include('auth.urls')),
     path('admin/', admin.site.urls),
-  #  path('api-auth/', include('rest_framework.urls')),
-    path('token/', TokenObtainPairView.as_view(), name='token_obtain_pair'),
-    path('token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
+    path('api-auth/', include('rest_framework.urls')),
 ]
 
 if settings.DEBUG:

@@ -1,14 +1,17 @@
 from django.urls import path
-from auth.views import MyObtainTokenPairView, RegisterView, ChangePasswordView, UpdateProfileView, LogoutView
-from rest_framework_simplejwt.views import TokenRefreshView
+from auth.views import RegisterView, ChangePasswordView, ChangeProfileView
+
+from knox import views as knox_views
+from .views import LoginAPI
+from django.urls import path
 
 
 urlpatterns = [
-    path('login/', MyObtainTokenPairView.as_view(), name='token_obtain_pair'),
-    path('login/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
     path('register/', RegisterView.as_view(), name='auth_register'), 
-    path('change_password/<int:pk>/', ChangePasswordView.as_view(), name='auth_change_password'),
-    path('update_profile/<int:pk>/', UpdateProfileView.as_view(), name='auth_update_profile'),
-    path('logout/', LogoutView.as_view(), name='auth_logout'),
+    path('change_password/', ChangePasswordView.as_view(), name='auth_change_password'),
+    path('update_profile/', ChangeProfileView.as_view(), name='auth_update_profile'),
+    path('login/', LoginAPI.as_view(), name='login'),
+    path('logout/', knox_views.LogoutView.as_view(), name='logout'),
+    path('logoutall/', knox_views.LogoutAllView.as_view(), name='logoutall'),
 
 ]
