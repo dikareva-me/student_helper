@@ -7,49 +7,66 @@
     </v-app-bar>
 
     <v-main>
-      <v-container>
-        <v-btn
-          v-if="allTasksMode"
-          color="primary"
-          elevation="6"
-          @click="createTask"
-        >
-          Создать новое задание
-        </v-btn>
-      </v-container>
+      
+      <template v-if="$store.state.isAuthenticated">
+        <v-container>
+          
+          <v-btn
+            v-if="allTasksMode"
+            color="primary"
+            elevation="6"
+            @click="createTask"
+          >
+            Создать новое задание
+          </v-btn>
+        </v-container>
 
-      <template v-if="newTaskMode">
-        <AddTask @hide-new-task="hideNewTask" />
+        <template v-if="newTaskMode">
+          <AddTask @hide-new-task="hideNewTask" />
+        </template>
+
+          <v-alert
+          color="red"
+          v-if="taskDel"
+          >
+          Задание удалено.
+          </v-alert>
+                
+        <template v-if="taskPageMode">
+          <Task @hide-task="hideTask" :task="task" />
+        </template>
+
+
+        <template v-if="allTasksMode">
+          <AllTasks @task-page="taskPage" />
+        </template>
+
       </template>
-
-        <v-alert
-        color="red"
-        v-if="taskDel"
-        >
-        Задание удалено.
-        </v-alert>
-              
-      <template v-if="taskPageMode">
-        <Task @hide-task="hideTask" :task="task" />
-      </template>
-
-
-      <template v-if="allTasksMode">
-        <AllTasks @task-page="taskPage" />
-      </template>
-
-
     </v-main>
   </v-app>
 </template>
 
 <script>
 import AddTask from "@/components/AddTask";
-//import Test from '@/components/Test';
 import Task from "@/components/Task";
 import AllTasks from "@/components/AllTasks";
 export default {
   name: "App",
+  beforeCreate() {
+      this.$store.commit('initializeStore')
+
+      const token = this.$store.state.token;
+      //ef175c99790058c4b0899d09c37b312229e3a6b335d57e387e1430fbd971c223;
+      console.log(token);
+      //this.$store.state.token
+
+      if (token) {
+        axios.defaults.headers.common['Authorization'] = "Token " + token
+      } else {
+        axios.defaults.headers.common['Authorization'] = ""
+      }
+    },
+
   components: {
     AllTasks,
     Task,
