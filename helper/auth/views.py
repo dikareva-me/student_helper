@@ -1,4 +1,4 @@
-from .serializers import RegisterSerializer, ChangePasswordSerializer, ChangeProfileSerializer
+from .serializers import RegisterSerializer, ChangePasswordSerializer, ChangeProfileSerializer, UserSerializer
 from rest_framework.permissions import AllowAny
 
 from django.contrib.auth.models import User
@@ -32,6 +32,12 @@ class LoginAPI(KnoxLoginView):
         return super(LoginAPI, self).post(request, format=None)
 
 
+class UserView(generics.RetrieveAPIView):
+    permission_classes = [IsAuthenticated]
+    serializer_class = UserSerializer
+
+    def get_object(self):
+        return self.request.user
 
 
 class ChangePasswordView(generics.UpdateAPIView):

@@ -4,6 +4,19 @@
       <div class="d-flex align-center">
         <v-toolbar-title>Student helper</v-toolbar-title>
       </div>
+
+        <div class="navbar-end">
+      <div class="navbar-item">
+              <div class="buttons">
+                <router-link to="/sign-up" class="button is-success"><strong>Sign up</strong></router-link>
+                <router-link to="/log-in" class="button is-light">Log in</router-link>
+              </div>
+      </div> 
+
+        </div>
+
+
+
     </v-app-bar>
 
     <v-main>
@@ -40,20 +53,84 @@
         <template v-if="allTasksMode">
           <AllTasks @task-page="taskPage" />
         </template>
-
       </template>
+      
+      <template v-else>
+
+     
+      </template>
+
+         <section class="section">
+      <router-view/>
+    </section>
+
+
     </v-main>
   </v-app>
 </template>
 
+
+
+<!--
+<template>
+  <div id="wrapper">
+    <nav class="navbar is-dark">
+      <div class="navbar-brand">
+        <router-link to="/" class="navbar-item"><strong>Invoicely</strong></router-link>
+      </div>
+
+      <div class="navbar-menu">
+        <div class="navbar-end">
+          <template v-if="$store.state.isAuthenticated">
+            <router-link to="/dashboard" class="navbar-item">Dashboard</router-link>
+
+            <div class="navbar-item">
+              <div class="buttons">
+                <router-link to="/dashboard/my-account" class="button is-light">My account</router-link>
+              </div>
+            </div>      
+          </template>
+
+          <template v-else>
+            <router-link to="/" class="navbar-item">Home</router-link>
+
+            <div class="navbar-item">
+              <div class="buttons">
+                <router-link to="/sign-up" class="button is-success"><strong>Sign up</strong></router-link>
+                <router-link to="/log-in" class="button is-light">Log in</router-link>
+              </div>
+            </div> 
+          </template>
+        </div>
+      </div>
+    </nav>
+
+    <section class="section">
+      <router-view/>
+    </section>
+
+    <footer class="footer">
+      <p class="has-text-centered">Copyright (c) 2021</p>
+    </footer>
+  </div>
+</template>
+-->
 <script>
+
+import axios from "axios";
 import AddTask from "@/components/AddTask";
+//import Test from '@/components/Test';
 import Task from "@/components/Task";
 import AllTasks from "@/components/AllTasks";
+import SignUp from "@/views/SignUp";
 export default {
   name: "App",
   beforeCreate() {
+
       this.$store.commit('initializeStore')
+      
+    
+     // this.$store.commit('removeToken')
 
       const token = this.$store.state.token;
       //ef175c99790058c4b0899d09c37b312229e3a6b335d57e387e1430fbd971c223;
@@ -71,6 +148,7 @@ export default {
     AllTasks,
     Task,
     AddTask,
+    SignUp,
   },
   data() {
     return {
@@ -118,3 +196,7 @@ export default {
   },
 };
 </script>
+
+<style lang="scss">
+@import '../node_modules/bulma';
+</style>

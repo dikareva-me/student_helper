@@ -1,22 +1,20 @@
 <template>
   <v-container>
-
     <v-divider></v-divider>
 
-
-      <v-col v-if="taskList.length">
-        <h3>Список заданий:</h3>
-       <!-- <v-flex --xs12 sm6 md11-->
-          <template>
-            <v-layout>
-              <v-flex >
-                <v-card
-                v-bind:class="{done: task.is_complete}" 
-                class="mb-3 "
-                v-for="task in taskList"
-                :key="task.id"
-                >
-                  <!--  
+    <v-col v-if="taskList.length">
+      <h3>Список заданий:</h3>
+      <!-- <v-flex --xs12 sm6 md11-->
+      <template>
+        <v-layout>
+          <v-flex>
+            <v-card
+              v-bind:class="{ done: task.is_complete }"
+              class="mb-3"
+              v-for="task in taskList"
+              :key="task.id"
+            >
+              <!--  
                     ANOTHER VERSION OF A CARD: маленький серый текст в описании и дедлайне. 
                     Эту версию лучше использоват, т.к. разделены v-card-title и v-card-text (в прошлой все в тайтле),
                     но надо отредактировать стиль.
@@ -44,51 +42,41 @@
                   </v-card-text>
 
     -->
-                 
-                 
-                 <!-- ЧТО ИСПРАВИТЬ: сделать по центру тайтл и мб другие элементы карточки
+
+              <!-- ЧТО ИСПРАВИТЬ: сделать по центру тайтл и мб другие элементы карточки
                   primary-title style="text-align:center" -->
-                  <v-card-title
-                  >
-                    <div>
-                      <div
-                      v-if="task.is_complete">
-                      <span class="red--text">Задание выполнено</span>
+              <v-card-title>
+                <div>
+                  <div v-if="task.is_complete">
+                    <span class="red--text">Задание выполнено</span>
+                  </div>
 
-                      </div>
+                  <h3 class="headline mb-2">{{ task.title }}</h3>
+                  <div>{{ task.description }}</div>
+                  <div>Дедлайн: {{ task.deadline }}</div>
+                </div>
+              </v-card-title>
 
-                      <h3 class="headline mb-2"
-                      > {{ task.title }}</h3>
-                      <div>{{ task.description }} </div>
-                      <div>Дедлайн: {{ task.deadline }}</div>
-                    </div>
-                  </v-card-title>
+              <v-card-actions>
+                <v-btn color="orange" @click="taskPage(task)"
+                  >Перейти на страницу задания
+                </v-btn>
 
-                  <v-card-actions>
-                    <v-btn 
-                    color="orange"
-                    @click="taskPage(task)"
-                    >Перейти на страницу задания
-                    </v-btn>
-
-                    <v-btn 
-                    color="orange"
-                    @click="updateStatus(task);"
-                    v-if="!task.is_complete"
-                    >Задание выполнено
-                    </v-btn>
-                    <v-btn 
-                    color="orange"
-                    @click="updateStatus(task);"
-                    v-else>Вернуть в невыполненные</v-btn>
-
-                  </v-card-actions>
-                </v-card>
-              </v-flex>
-            </v-layout>
-          </template>
-
-      </v-col>
+                <v-btn
+                  color="orange"
+                  @click="updateStatus(task)"
+                  v-if="!task.is_complete"
+                  >Задание выполнено
+                </v-btn>
+                <v-btn color="orange" @click="updateStatus(task)" v-else
+                  >Вернуть в невыполненные</v-btn
+                >
+              </v-card-actions>
+            </v-card>
+          </v-flex>
+        </v-layout>
+      </template>
+    </v-col>
   </v-container>
 </template>
 
@@ -96,27 +84,27 @@
 import axios from "axios";
 export default {
   components: {},
-   props: {
-   // taskList: Array
-    },
+  props: {
+    // taskList: Array
+  },
   data: () => ({
     selected: [],
     taskList: [],
     url: "http://localhost:8000/api/task/",
   }),
-   mounted() {
+  mounted() {
     this.getTasks();
   },
   methods: {
-   getTasks() {
-       axios.get(`${this.url}?ordering=is_complete`).then((response) => {
+    getTasks() {
+      axios.get(`${this.url}?ordering=is_complete`).then((response) => {
         this.taskList = response.data;
         response.data.forEach((element, index) => {
           if (!element.is_complete) this.selected.push(index);
           this.$forceUpdate();
         });
-    })
-   },
+      });
+    },
     reset() {
       this.$refs.form.reset();
     },
@@ -127,28 +115,26 @@ export default {
       var data = {
         is_complete: item.is_complete,
       };
-      axios.patch(url, data)
-      .then((response) => {
-        console.log(response);
-        this.getTasks();
-      })
-      .catch((error) => {
-        console.log(error);
-      });
+      axios
+        .patch(url, data)
+        .then((response) => {
+          console.log(response);
+          this.getTasks();
+        })
+        .catch((error) => {
+          console.log(error);
+        });
     },
-    taskPage(task){
+    taskPage(task) {
       console.log(task);
       this.$emit("task-page", task);
-    }
-   
-
+    },
   },
-  
 };
 </script>
 
 <style scoped>
-.done{
-  background-color:rgb(192, 187, 187)
+.done {
+  background-color: rgb(192, 187, 187);
 }
 </style>

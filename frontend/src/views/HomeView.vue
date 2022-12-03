@@ -1,25 +1,17 @@
 <template>
-    <v-container>
-       
-  
-    {{"HELLO WORLD"}}
-
-
+  <v-container>
+    {{ "HELLO WORLD" }}
   </v-container>
-
-  
-
 </template>
 
 <script>
-import AllTasks from "../components/AllTasks";
-//import NewTask from "../components/NewTask";
+//import AllTasks from "../components/AllTasks";
 export default {
   name: "Home",
 
   components: {
-    AllTasks,
-  //  NewTask
+  //  AllTasks,
+    //  NewTask
   },
 };
 </script>
