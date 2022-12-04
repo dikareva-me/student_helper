@@ -41,9 +41,6 @@ class UserView(generics.RetrieveAPIView):
 
 
 class ChangePasswordView(generics.UpdateAPIView):
-    """
-    An endpoint for changing password.
-    """
     serializer_class = ChangePasswordSerializer
     model = User
     permission_classes = (IsAuthenticated,)
@@ -79,9 +76,6 @@ class ChangePasswordView(generics.UpdateAPIView):
 
 
 class ChangeProfileView(generics.UpdateAPIView):
-    """
-    An endpoint for changing profile.
-    """
     serializer_class = ChangeProfileSerializer
     model = User
     permission_classes = (IsAuthenticated,)

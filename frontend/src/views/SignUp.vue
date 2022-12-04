@@ -2,13 +2,13 @@
     <div class="page-signup">
         <div class="columns">
             <div class="column is-4 is-offset-4">
-                <h1 class="title">Sign up</h1>
+                <h1 class="title">Зарегистрироваться</h1>
 
                 <form @submit.prevent="submitForm">
                     <div class="field">
 
                     <div class="field">
-                        <label>Username</label>
+                        <label>Логин</label>
                         <div class="control">
                             <input name="username" class="input" v-model="username">
                         </div>
@@ -22,7 +22,7 @@
                     
 
                     <div class="field">
-                        <label>Password</label>
+                        <label>Пароль</label>
                         <div class="control">
                             <input type="password" name="password" class="input" v-model="password">
                         </div>
@@ -30,7 +30,7 @@
 
 
                     <div class="field">
-                        <label>Repeat password</label>
+                        <label>Повторите пароль</label>
                         <div class="control">
                             <input type="password" name="Repeat password" class="input" v-model="password2">
                         </div>
@@ -47,7 +47,7 @@
 
                     <div class="field">
                         <div class="control">
-                            <button class="button is-success">Sign up</button>
+                            <button class="button is-success">Зарегистрироваться</button>
                         </div>
                     </div>
                 </form>
@@ -71,7 +71,7 @@ export default {
         }
     },
     methods: {
-        submitForm(e) {
+        submitForm() {
             const formData = {
                 username: this.username,
                 password: this.password,

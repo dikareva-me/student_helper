@@ -3,7 +3,8 @@
     <v-divider></v-divider>
 
     <v-col v-if="taskList.length">
-      <h3>Список заданий:</h3>
+      
+      <h2 class="title">Список заданий:</h2>
       <!-- <v-flex --xs12 sm6 md11-->
       <template>
         <v-layout>

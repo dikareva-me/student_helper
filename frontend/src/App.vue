@@ -1,18 +1,31 @@
 <template>
   <v-app>
     <v-app-bar app color="primary" dark>
-      <div class="d-flex align-center">
-        <v-toolbar-title>Student helper</v-toolbar-title>
-      </div>
-
+      <v-toolbar-title>Student helper</v-toolbar-title>
+        
+      <div class="navbar-menu">
         <div class="navbar-end">
-      <div class="navbar-item">
-              <div class="buttons">
-                <router-link to="/sign-up" class="button is-success"><strong>Sign up</strong></router-link>
-                <router-link to="/log-in" class="button is-light">Log in</router-link>
-              </div>
-      </div> 
 
+          <template v-if="$store.state.isAuthenticated">
+            <div class="navbar-item">
+              <div class="buttons">
+                
+                <router-link to="/main-page" class="button is-success"><strong>Главная страница</strong></router-link>
+                <router-link to="/user-profile" class="button is-light">Профиль</router-link>
+              </div>
+            </div>      
+          </template>
+
+          <template v-else>
+            <div class="navbar-item">
+              <div class="buttons">
+                  <router-link to="/sign-up" class="button is-success"><strong>Зарегистрироваться</strong></router-link>
+                  <router-link to="/log-in" class="button is-light">Войти</router-link>
+                </div>
+            </div> 
+          </template>
+                      
+          </div> 
         </div>
 
 
@@ -20,7 +33,7 @@
     </v-app-bar>
 
     <v-main>
-      
+    <!--  
       <template v-if="$store.state.isAuthenticated">
         <v-container>
           
@@ -56,9 +69,8 @@
       </template>
       
       <template v-else>
-
      
-      </template>
+      </template> -->
 
          <section class="section">
       <router-view/>
@@ -115,6 +127,7 @@
   </div>
 </template>
 -->
+
 <script>
 
 import axios from "axios";
@@ -126,16 +139,8 @@ import SignUp from "@/views/SignUp";
 export default {
   name: "App",
   beforeCreate() {
-
-      this.$store.commit('initializeStore')
-      
-    
-     // this.$store.commit('removeToken')
-
+      console.log(localStorage.getItem('token'))
       const token = this.$store.state.token;
-      //ef175c99790058c4b0899d09c37b312229e3a6b335d57e387e1430fbd971c223;
-      console.log(token);
-      //this.$store.state.token
 
       if (token) {
         axios.defaults.headers.common['Authorization'] = "Token " + token

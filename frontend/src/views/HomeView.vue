@@ -10,8 +10,6 @@ export default {
   name: "Home",
 
   components: {
-  //  AllTasks,
-    //  NewTask
   },
 };
 </script>

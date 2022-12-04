@@ -120,8 +120,10 @@ export default {
         is_complete: this.is_complete,
         email: this.email,
         deadline: this.deadline,
-        user: 1,
+        user: this.$store.state.user.id,
       };
+      console.log(this.$store.state.user.username);
+      console.log(this.$store.state.user.id);
       console.log(newTask);
       axios
         .post("http://localhost:8000/api/task/", newTask)

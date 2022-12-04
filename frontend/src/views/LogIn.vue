@@ -2,18 +2,18 @@
     <div class="page-login">
         <div class="columns">
             <div class="column is-4 is-offset-4">
-                <h1 class="title">Log in</h1>
+                <h1 class="title">Войти в аккаунт</h1>
 
                 <form @submit.prevent="submitForm">
                     <div class="field">
-                        <label>Username</label>
+                        <label>Логин</label>
                         <div class="control">
                             <input name="username" class="input" v-model="username">
                         </div>
                     </div>
 
                     <div class="field">
-                        <label>Password</label>
+                        <label>Пароль</label>
                         <div class="control">
                             <input type="password" name="password" class="input" v-model="password">
                         </div>
@@ -29,7 +29,7 @@
                         </div>
                     </div> -->
                      <v-btn color="green" class="mr-4" @click="login"
-              >Log In
+              >Войти
             </v-btn>
                 </form>
             </div>
@@ -52,7 +52,7 @@ export default {
         }
     },
     methods: {
-        login() {
+        async login() {
             axios.defaults.headers.common["Authorization"] = ""
 
             localStorage.removeItem("token")
@@ -62,7 +62,7 @@ export default {
                 password: this.password
             }
 
-            axios
+            await axios
                 .post("http://127.0.0.1:8000/auth/login/", formData)
                 .then(response => {
                     const token = response.data.token
@@ -72,11 +72,11 @@ export default {
                     axios.defaults.headers.common["Authorization"] = "Token " + token
 
                     localStorage.setItem("token", token)
+                    console.log(localStorage.getItem('token'))
 
-                    this.$router.push('/dashboard')
                     
-                    console.log(this.$store.state.token)
-                    console.log(token)
+              //      console.log(this.$store.state.token)
+                 //   console.log(token)
                 })
                 .catch(error => {
                     if (error.response) {
@@ -90,8 +90,36 @@ export default {
                     } else {
                         console.log(JSON.stringify(error))
                     }
+                });
+
+
+                axios
+                .get("http://127.0.0.1:8000/auth/user/")
+                .then(response => {
+                    this.$store.commit('setUser', {'username': response.data.username, 'id': response.data.id})
+
+                    localStorage.setItem('username', response.data.username)
+                    localStorage.setItem('email', response.data.email)
+                    localStorage.setItem('userid', response.data.id)
+                    
+                    console.log("response data");
+                    console.log(response.data);
+
+                    
+                    console.log("user id in store");
+                    console.log(this.$store.state.user.id);
+
+                    
+                    this.$router.push('/main-page')
+
+
+
+                })
+                .catch(error => {
+                    console.log(JSON.stringify(error))
                 })
         }
+        }
     }
-}
+
 </script>

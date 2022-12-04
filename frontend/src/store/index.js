@@ -7,7 +7,8 @@ export default new Vuex.Store({
   state: {
     user: {
       id:'',
-      username: ''
+      username: '',
+      email: '',
     },
     isAuthenticated: false,
     token: ''
@@ -18,54 +19,35 @@ export default new Vuex.Store({
       if (localStorage.getItem('token')) {
         state.token = localStorage.getItem('token')
         state.isAuthenticated = true
+        state.user.username = localStorage.getItem('username')
+        state.user.email = localStorage.getItem('email')
+        state.user.id = localStorage.getItem('userid')
+        console.log(state.isAuthenticated)
       } else {
         state.token = ''
         state.isAuthenticated = false
+        state.user.username = ''
+        state.user.id = ''
+        state.user.email = ''
       }
     },
     setToken(state, token) {
       state.token = token
       state.isAuthenticated = true
+      
     },
     removeToken(state) {
       state.token = ''
       state.isAuthenticated = false
+      state.user.id = ''
+      state.user.username = ''
+      state.user.email = ''
+        
+    },
+    setUser(state, user) {
+      state.user = user
     }
   },
   actions: {},
   modules: {},
-});/*
-
-export default Vuex.createStore({
-  state: {
-    user: {
-      username: ''
-    },
-    isAuthenticated: false,
-    token: ''
-  },
-  mutations: {
-    initializeStore(state) {
-      if (localStorage.getItem('token')) {
-        state.token = localStorage.getItem('token')
-        state.isAuthenticated = true
-      } else {
-        state.token = ''
-        state.isAuthenticated = false
-      }
-    },
-    setToken(state, token) {
-      state.token = token
-      state.isAuthenticated = true
-    },
-    removeToken(state) {
-      state.token = ''
-      state.isAuthenticated = false
-    }
-  },
-  actions: {
-  },
-  modules: {
-  }
-})
-*/
+});
