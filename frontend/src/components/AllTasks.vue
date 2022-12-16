@@ -5,7 +5,6 @@
     <v-col v-if="taskList.length">
       
       <h2 class="title">Список заданий:</h2>
-      <!-- <v-flex --xs12 sm6 md11-->
       <template>
         <v-layout>
           <v-flex>
@@ -44,8 +43,6 @@
 
     -->
 
-              <!-- ЧТО ИСПРАВИТЬ: сделать по центру тайтл и мб другие элементы карточки
-                  primary-title style="text-align:center" -->
               <v-card-title>
                 <div>
                   <div v-if="task.is_complete">
@@ -89,7 +86,7 @@ export default {
     // taskList: Array
   },
   data: () => ({
-    selected: [],
+    //selected: [],
     taskList: [],
     url: "http://localhost:8000/api/task/",
   }),
@@ -98,13 +95,27 @@ export default {
   },
   methods: {
     getTasks() {
-      axios.get(`${this.url}?ordering=is_complete`).then((response) => {
-        this.taskList = response.data;
-        response.data.forEach((element, index) => {
-          if (!element.is_complete) this.selected.push(index);
-          this.$forceUpdate();
+      axios
+        .get(`${this.url}?ordering=is_complete`)
+        .then((response) => {
+          this.taskList = response.data;
+
+        /*  response.data.forEach((element, index) => {
+            if (!element.is_complete) 
+              this.selected.push(index);
+          //  this.$forceUpdate();
+          });*/
+        })
+        .catch((error) => {  
+          if (error.response.status === 401) {
+            
+            this.$router.push('/log-in');
+    
+            axios.defaults.headers.common["Authorization"] = ""
+            localStorage.removeItem("token")
+            this.$store.commit('removeToken')
+          }
         });
-      });
     },
     reset() {
       this.$refs.form.reset();

@@ -11,14 +11,14 @@
             v-model="task.title"
             :counter="128"
             :rules="titleRules"
-            label="Title"
+            label="Название"
             required
           ></v-text-field>
 
           <v-textarea
             v-model="task.description"
-            autocomplete="Description"
-            label="Description"
+            autocomplete="Описание"
+            label="Описание"
           ></v-textarea>
 
           <v-text-field
@@ -41,7 +41,7 @@
             <template v-slot:activator="{ on, attrs }">
               <v-text-field
                 v-model="task.deadline"
-                label="Deadline date"
+                label="Дата дедлайна"
                 prepend-icon="mdi-calendar"
                 readonly
                 v-bind="attrs"

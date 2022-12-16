@@ -6,8 +6,8 @@ class Task(models.Model):
  # """Task model."""
 
   title = models.CharField(max_length=128, null=False)
-  description = models.TextField(null=True)
-  subject = models.TextField(null=True)
+  description = models.TextField(null=True, default=None, blank=True)
+  subject = models.TextField(null=True, default=None, blank=True)
   is_complete = models.BooleanField(default=False)
   user = models.ForeignKey(                          
     settings.AUTH_USER_MODEL,
@@ -16,7 +16,7 @@ class Task(models.Model):
     null=True,
     blank=True
   )
-  email = models.EmailField(null=True)
+  email = models.EmailField(null=True, default=None, blank=True)
   created_at = models.DateTimeField(auto_now_add=True)
   updated_at = models.DateTimeField(auto_now=True)
   deadline = models.DateField()
