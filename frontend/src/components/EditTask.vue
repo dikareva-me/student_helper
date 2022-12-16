@@ -1,10 +1,6 @@
 <template>
   <v-container>
-    
-    <v-btn 
-    color="primary" 
-    elevation="6" 
-    @click="backToTask">
+    <v-btn color="primary" elevation="6" @click="backToTask">
       ← Вернуться к просмотру задания
     </v-btn>
 
@@ -31,10 +27,7 @@
             label="E-mail"
           ></v-text-field>
 
-         <v-text-field
-          v-model="subject"
-          label="Предмет"
-        ></v-text-field>
+          <v-text-field v-model="subject" label="Предмет"></v-text-field>
 
           <v-menu
             ref="menu"
@@ -69,34 +62,23 @@
           </v-menu>
 
           <div class="mb-3">
-            <v-btn 
-            color="primary" 
-            class="mr-4" 
-            @click="cancelChanges"
+            <v-btn color="primary" class="mr-4" @click="cancelChanges"
               >Отменить изменения
             </v-btn>
 
-            <v-btn 
-            color="green" 
-            class="mr-4" 
-            @click="editTask"
+            <v-btn color="green" class="mr-4" @click="editTask"
               >Сохранить изменения
             </v-btn>
           </div>
 
-          <v-alert 
-          color="green" 
-          type="success" 
-          v-if="saved_changes">
+          <v-alert color="green" type="success" v-if="saved_changes">
             Изменения сохранены.
           </v-alert>
-          
         </v-form>
       </v-col>
     </v-row>
   </v-container>
 </template>
-
 
 <script>
 import axios from "axios";

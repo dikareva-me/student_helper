@@ -1,80 +1,63 @@
 <template>
   <v-container>
-
     <template v-if="taskPageMode">
-      <v-btn
-      color="primary"
-      elevation="6"
-      @click="backToTasks"
-      >
-      ← Вернуться к заданиям
+      <v-btn color="primary" elevation="6" @click="backToTasks">
+        ← Вернуться к заданиям
       </v-btn>
-
-
-
 
       <v-row class="mb-3">
         <v-col cols="12">
           <v-form ref="form" lazy-validation class="text-center">
+            <h2 lazy-validation class="text-center">Задание</h2>
+            <br />
+            <br />
 
-              <h2 lazy-validation class="text-center">Задание</h2>
-              <br>
-              <br>
-
-              <div>
+            <div>
               <strong>Название:</strong>
-              {{task.title}}
-              <br>
-              <br>
+              {{ task.title }}
+              <br />
+              <br />
               <template v-if="task.description != null">
-              <strong>Описание:</strong>
-              {{task.description}}
-              <br>
-              <br>
+                <strong>Описание:</strong>
+                {{ task.description }}
+                <br />
+                <br />
               </template>
 
               <template v-if="task.subject != null">
-              <strong>Предмет:</strong>
-              <br>
-              <br>
+                <strong>Предмет:</strong>
+                <br />
+                <br />
               </template>
 
               <template v-if="task.email != null">
-              <strong>Email:</strong>
-              {{task.email}}
-              <br>
-              <br>
+                <strong>Email:</strong>
+                {{ task.email }}
+                <br />
+                <br />
               </template>
 
               <strong>Дедлайн:</strong>
-              {{task.deadline}}
-              <br>
-              <br>
+              {{ task.deadline }}
+              <br />
+              <br />
 
               <template v-if="task.is_complete != true">
-              <strong>Задание не выполнено</strong>
+                <strong>Задание не выполнено</strong>
               </template>
               <template v-else>
-              <strong>Задание выполнено</strong>
+                <strong>Задание выполнено</strong>
               </template>
+            </div>
+            <br />
 
-              </div>
-              <br>
-
-            <v-btn color="blue" 
-            class="mr-4" 
-            @click="editTask">
+            <v-btn color="blue" class="mr-4" @click="editTask">
               Редактировать задание
             </v-btn>
 
-            <v-dialog 
-            v-model="dialog" 
-            width="550">
+            <v-dialog v-model="dialog" width="550">
               <template v-slot:activator="{ on, attrs }">
-                <v-btn 
-                color="red" 
-                v-bind="attrs" 
-                v-on="on">
+                <v-btn color="red" v-bind="attrs" v-on="on">
                   Удалить задание
                 </v-btn>
               </template>
@@ -88,19 +71,11 @@
 
                 <v-card-actions>
                   <v-spacer></v-spacer>
-                  <v-btn 
-                  color="primary"
-                  text
-                  @click="dialog = false">
+                  <v-btn color="primary" text @click="dialog = false">
                     Отмена
                   </v-btn>
 
-                  <v-btn 
-                  color="Red" 
-                  @click="deleteTask">
-                    Удалить
-                  </v-btn>
-
+                  <v-btn color="Red" @click="deleteTask"> Удалить </v-btn>
                 </v-card-actions>
               </v-card>
             </v-dialog>
@@ -149,7 +124,8 @@ export default {
     async deleteTask() {
       this.dialog = false;
       const url = `${this.url}${this.task.id}/`;
-      await axios.delete(url, this.task)
+      await axios
+        .delete(url, this.task)
         .then((response) => {
           console.log(response);
           console.log("no err");
@@ -162,9 +138,9 @@ export default {
       console.log(this.taskDeleted);
       this.$emit("hide-task", this.taskDeleted);
     },
-    backToTasks(){
+    backToTasks() {
       this.$emit("hide-task", this.taskDeleted);
-    }
+    },
   },
 };
 </script>
