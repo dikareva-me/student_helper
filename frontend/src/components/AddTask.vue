@@ -50,7 +50,8 @@
                 v-model="deadline"
                 label="Дата дедлайна"
                 prepend-icon="mdi-calendar"
-                readonly
+                hint="гггг-мм-дд"
+                
                 v-bind="attrs"
                 v-on="on"
               ></v-text-field>
@@ -143,7 +144,6 @@ export default {
           this.taskError = true;
         });
 
-      // this.$emit("task-created", newTask);
     },
     reset() {
       this.$refs.form.reset();

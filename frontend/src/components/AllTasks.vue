@@ -100,11 +100,7 @@ export default {
         .then((response) => {
           this.taskList = response.data;
 
-        /*  response.data.forEach((element, index) => {
-            if (!element.is_complete) 
-              this.selected.push(index);
-          //  this.$forceUpdate();
-          });*/
+ 
         })
         .catch((error) => {  
           if (error.response.status === 401) {
