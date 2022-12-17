@@ -17,20 +17,20 @@
               {{ task.title }}
               <br />
               <br />
-              <template v-if="task.description != null">
+              <template v-if="task.description">
                 <strong>Описание:</strong>
                 {{ task.description }}
                 <br />
                 <br />
               </template>
 
-              <template v-if="task.subject != null">
+              <template v-if="task.subject">
                 <strong>Предмет:</strong>
                 <br />
                 <br />
               </template>
 
-              <template v-if="task.email != null">
+              <template v-if="task.email">
                 <strong>Email:</strong>
                 {{ task.email }}
                 <br />

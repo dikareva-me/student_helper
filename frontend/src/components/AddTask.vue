@@ -1,10 +1,15 @@
 <template>
   <v-container>
-    <v-btn color="primary" elevation="6" @click="backToTasks">
+    <v-btn 
+    color="primary" 
+    elevation="6" 
+    class="mb-3"
+    @click="backToTasks">
       ← Вернуться к заданиям
     </v-btn>
 
-    <h3>Создать новое задание:</h3>
+    <h2 class="title">Создать новое задание:</h2>
+    
 
     <v-row class="mb-3">
       <v-col cols="12">
@@ -45,7 +50,8 @@
                 v-model="deadline"
                 label="Дата дедлайна"
                 prepend-icon="mdi-calendar"
-                readonly
+                hint="гггг-мм-дд"
+                
                 v-bind="attrs"
                 v-on="on"
               ></v-text-field>
@@ -138,7 +144,6 @@ export default {
           this.taskError = true;
         });
 
-      // this.$emit("task-created", newTask);
     },
     reset() {
       this.$refs.form.reset();

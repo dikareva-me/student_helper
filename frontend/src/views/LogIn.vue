@@ -23,14 +23,10 @@
                         <p v-for="error in errors" v-bind:key="error">{{ error }}</p>
                     </div>
 
-                  <!--  <div class="field">
-                        <div class="control">
-                            <button class="button is-success">Log in</button>
-                        </div>
-                    </div> -->
                      <v-btn color="green" class="mr-4" @click="login"
-              >Войти
-            </v-btn>
+                    >Войти
+                    </v-btn>
+                    
                 </form>
             </div>
         </div>
